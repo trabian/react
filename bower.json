@@ -1,0 +1,5 @@
+{
+  "name": "react",
+  "version": "0.9.1",
+  "main": "build/react.js"
+}
