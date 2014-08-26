@@ -1,5 +1,5 @@
 /**
- * Copyright 2013-2014 Facebook, Inc.
+ * Copyright 2014 Facebook, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @providesModule AutoFocusMixin
- * @typechecks static-only
+ * @providesModule focusNode
  */
 
 "use strict";
 
-var focusNode = require('focusNode');
-
-var AutoFocusMixin = {
-  componentDidMount: function() {
-    if (this.props.autoFocus) {
-      focusNode(this.getDOMNode());
-    }
+/**
+ * @param {DOMElement} node input/textarea to focus
+ */
+function focusNode(node) {
+  // IE8 can throw "Can't move focus to the control because it is invisible,
+  // not enabled, or of a type that does not accept the focus." for all kinds of
+  // reasons that are too expensive and fragile to test.
+  try {
+    node.focus();
+  } catch(e) {
   }
-};
+}
 
-module.exports = AutoFocusMixin;
+module.exports = focusNode;
